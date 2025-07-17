@@ -1,4 +1,4 @@
-import {TopMenu, SideBar} from "@/components/index";
+import {TopMenu, SideBar, Footer} from "@/components/index";
 
 
 
@@ -9,10 +9,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <>
     <main className="min-h-screen ">
       {" "}
       <TopMenu/>
       <SideBar/>
+    
       
 
       <div className="px-0 sm:px-10">
@@ -20,6 +22,9 @@ export default function RootLayout({
 
       {children}
       </div>
+      <Footer/>
     </main>
+    
+    </>
   );
 }

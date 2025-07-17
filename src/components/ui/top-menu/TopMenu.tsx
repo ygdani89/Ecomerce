@@ -48,7 +48,7 @@ function TopMenu() {
           <IoSearchOutline className="font-bold w-5 h-5 mx-2" />
         </Link>
 
-        <Link href="/serch" className="flex">
+        <Link href="/cart" className="flex">
           <div className="relative">
             <span className="absolute text-xs rounded-full px-1 font-bold -top-2 bg-blue-500 -right-2 text-white ">
               {" "}

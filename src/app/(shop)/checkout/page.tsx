@@ -15,6 +15,7 @@ function page() {
       <div className="flex flex-col w-[1000px] ">
         <Title title={"Verificar Orden"} />
 
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
           {/* Carrito */}
           <div className=" flex flex-col mt-5">
             <span className="text-xl"> Editar carrito </span>

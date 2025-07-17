@@ -13,3 +13,4 @@ export {default as SideBar } from '@/components/ui/sideBar/SideBar'
 export { default as Title } from './ui/title/Title';
 export { default as PageNotFound } from './ui/not-found/PageNotFound';
 export {default as TopMenu} from "./ui/top-menu/TopMenu"
+export {default as Footer} from "./ui/footer/Footer"
