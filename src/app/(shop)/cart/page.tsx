@@ -52,11 +52,11 @@ function page() {
           </div>
           {/* checkout - Resumen de la compra   */}
 
-          <div className="bg-white rounded-xl shadow-xl p-7">
+          <div className= " bg-white rounded-xl shadow-xl h-fit p-7">
             <h2 className="text-2xl ">resumen orden</h2>
             <div className="grid grid-cols-2">
               <span>No. Productos</span>
-              <span className="text-right">3 articulos</span>
+              <span className="text-right">3 aticulos</span>
 
               <span>Sub Total</span>
               <span className="text-right ">$ 90 </span>
