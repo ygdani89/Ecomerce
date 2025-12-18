@@ -1,23 +1,30 @@
-import { initialData } from "./seed";
+import { create } from 'zustand';
+import initialData  from './seed'
 import prisma from '../lib/prisma';
+
 
 
 async function main() {
 
-    
-
-
-   
-
-    console.log('Ejecutado');
-    
-
-
-
+  // 1. Borrar registros previos
+    await prisma.productImage.deleteMany();
+  
+  
+  console.log( 'Seed ejecutado correctamente' );
 }
 
 
-(() => {
- 
-    main()
-})();
+
+
+
+
+
+
+
+( () => {
+
+  if ( process.env.NODE_ENV === 'production' ) return;
+
+
+  main();
+} )();

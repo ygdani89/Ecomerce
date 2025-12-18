@@ -22,7 +22,7 @@ interface SeedProduct {
   
   
   
-  export const initialData: SeedData = {
+ const initialData: SeedData = {
   
     categories: [
       'Shirts', 'Pants', 'Hoodies', 'Hats'
@@ -812,3 +812,5 @@ interface SeedProduct {
       },
     ]
   };
+
+  export default  initialData
