@@ -16,10 +16,10 @@ interface Props {
     id: string;
   };
 }
-function page({ params }: Props) {
+async function page({ params }: Props) {
 
 
-  const { id } = params;
+  const { id } =  params;
 
   //TODO: verificacion  si el ID corresponde al Usuario logueado 
 
