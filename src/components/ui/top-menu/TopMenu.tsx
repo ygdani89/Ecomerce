@@ -44,7 +44,7 @@ function TopMenu() {
 
       {/* Serch , cart , Menu  */}
       <div className="flex items-center ">
-        <Link href="/serch">
+        <Link href="#">
           <IoSearchOutline className="font-bold w-5 h-5 mx-2" />
         </Link>
 
