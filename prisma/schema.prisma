@@ -44,18 +44,15 @@ model Product {
   description String
   inStock     Int
   price       Float    @default(0)
-  size        Size[]   @default([])
+  size        Size[]
   slug        String   @unique
-  tag         String[] @default([])
+  tag         String[]
   gender      Gender[]
-
-  category     Category       @relation(fields: [categoryId], references: [id])
-  categoryId   String
-
-  // relacione con la tabla ProductImage
+  
   ProductImage ProductImage[]
 
-  @@unique([gender])
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
 }
 
 model ProductImage {
