@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import initialData  from './seed';
+import initialData from './seed';
 import prisma from '../lib/prisma';
 
 
@@ -12,7 +12,7 @@ async function main() {
   await prisma.product.deleteMany();
   await prisma.category.deleteMany();
   // ]);
-  
+
   const { categories, products } = initialData;
 
 
@@ -20,55 +20,67 @@ async function main() {
   // {
   //   name: 'Shirt'
   // }
-  const categoriesData = categories.map( (name) => ({ name }));
-  
+  const categoriesData = categories.map((name) => ({ name }));
+
   await prisma.category.createMany({
     data: categoriesData
   });
 
-  
+
   const categoriesDB = await prisma.category.findMany();
-  
-  const categoriesMap = categoriesDB.reduce( (map, category) => {
-    map[ category.name.toLowerCase()] = category.id;
+
+  const categoriesMap = categoriesDB.reduce((map, category) => {
+    map[category.name.toLowerCase()] = category.id;
     return map;
   }, {} as Record<string, string>); //<string=shirt, string=categoryID>
-  
-  
+
+
 
   // Productos
 
-  products.forEach( async(product) => {
+const product1 =products[0]
+  const {images} = products[0]
 
-    
-    const { type, sizes , images, tags, gender, ...rest } = product;
+  await prisma.product.create({
+    data:{
+      ...product1,
+      categoryId: categoriesMap["shirts"]
+    }
+  })
 
-    const dbProduct = await prisma.product.create({
-      data: {
-        ...rest,
-        categoryId: categoriesMap[type]
-      }
-    })
-
-
-    // Images
-    const imagesData = images.map((image) => ({
-      ulr: image,                 // Prisma espera `ulr`
-      productID: dbProduct.id,    // Prisma espera `productID`
-    }));
-    
-
-    await prisma.productImage.createMany({
-      data: imagesData
-    });
-
-  });
+  // products.forEach(async (product) => {
 
 
+  //   // tupe , Size gender , tags 
+  //   // const {  images ,sizes , type, tags , gender ,...rest } = products[0];
+
+  //   // await prisma.product.create({
+
+  //   //   data: {
+  //   //     ...rest,
+  //   //     categoryId: categoriesMap['shirts']
+  //   //   }
+  //   // })
+
+
+  //   // // Images
+  //   // const imagesData = images.map((image) => ({
+  //   //   ulr: image,                 // Prisma espera `ulr`
+  //   //   productID: dbProduct.id,    // Prisma espera `productID`
+  //   // }));
+
+
+  //   // await prisma.productImage.createMany({
+  //   //   data: imagesData
+  //   // });
+
+  // });
 
 
 
-  console.log( 'Seed ejecutado correctamente' );
+
+
+  console.log('Seed ejecutado correctamente', product1);
 }
 
 
