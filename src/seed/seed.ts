@@ -15,7 +15,7 @@ interface SeedProduct {
   type ValidTypes = 'shirts' | 'pants' | 'hoodies' | 'hats';
   
   interface SeedData {
-    categories: string[];
+    categories: String[];
     products: SeedProduct[];
   }
   
@@ -25,7 +25,7 @@ interface SeedProduct {
  const initialData: SeedData = {
   
     categories: [
-      'Shirts', 'Pants', 'Hoodies', 'Hats'
+      'Shirts','Pants','Hoodies','Hats'
     ],
     products: [
       {
