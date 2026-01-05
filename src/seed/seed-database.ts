@@ -13,7 +13,7 @@ async function main() {
     prisma.category.deleteMany(),
   ])
 
-  // Inssertar una categoria 
+  //Inssertar una categoria 
 
   // await prisma.category.create({
   //   data: {
@@ -21,87 +21,61 @@ async function main() {
   //   }
   // })
 
-  // insertar Categorias 
+
+  // trayendo el seed de mi BD
   const { categories, products } = initialData;
 
-  const categoriesData = categories.map((name) => ({name}))
+  // Poniendo en un  arreglo  
+  const categoriesData = categories.map((name) => ({ name }))
 
 
+  // insertar todas las Categorias 
   await prisma.category.createMany({
     // createMany  Esta esperando que le mande un arreglo  por eso marca error 
-    data:categoriesData
+    data: categoriesData,
+    skipDuplicates: true
   });
 
-  console.log(categoriesData)
+
+
+
+  // Categorias ID
+
+  // llamado a la BD  , por las categorias 
+  const categoriesDB = await prisma.category.findMany();
+
+
+  // un Mapa para que cuando consulte la categrotia sea shirt hat , me devuelva un ID 
+  const categoriesMap = categoriesDB.reduce((map, category) => {
+
+    // normalizo los datos poniendolos en Minusculas  y  cada categoria  señala un ID 
+    map[category.name.toLowerCase()] = category.id
+
+    return map
+  }, {} as Record<string, string>)
 
 
 
 
+   const {images , type, ...product1} = products[0]
 
 
-
-  // const { categories, products } = initialData;
-
-
-  //   //  Categorias
-  //   // {
-  //   //   name: 'Shirt'
-  //   // }
-  //   const categoriesData = categories.map((name) => ({ name }));
-
-  //   await prisma.category.createMany({
-  //     data: categoriesData
-  //   });
-
-
-  //   const categoriesDB = await prisma.category.findMany();
-
-  //   const categoriesMap = categoriesDB.reduce((map, category) => {
-  //     map[category.name.toLowerCase()] = category.id;
-  //     return map;
-  //   }, {} as Record<string, string>); //<string=shirt, string=categoryID>
+  await prisma.product.create({
+    data: {
+...product1,
+      // title: "daniel",
+      // description: "daniel Para la casa",
+      // inStock: 36,
+      // // price       Float    @default(0)
+      // sizes: ["L"],
+      // slug: "ajsdbkajd",
+      // tags: ["String[]"],
+      // gender: ["men"],
+      categoryId: categoriesMap["shirts"]
+    }
+  })
 
 
-
-  //   // Productos
-
-  // // const product1 =products[0]
-  // //   const {images , title} = products[0]
-
-  // //   await prisma.product.create({
-  // //     data:{
-  // //       ...images,
-  // //       categoryId: categoriesMap["shirts"]
-  // //     }
-  // //   })
-
-  //   // products.forEach(async (product) => {
-
-
-  //   //   // tupe , Size gender , tags 
-  //   //   // const {  images ,sizes , type, tags , gender ,...rest } = products[0];
-
-  //   //   // await prisma.product.create({
-
-  //   //   //   data: {
-  //   //   //     ...rest,
-  //   //   //     categoryId: categoriesMap['shirts']
-  //   //   //   }
-  //   //   // })
-
-
-  //   //   // // Images
-  //   //   // const imagesData = images.map((image) => ({
-  //   //   //   ulr: image,                 // Prisma espera `ulr`
-  //   //   //   productID: dbProduct.id,    // Prisma espera `productID`
-  //   //   // }));
-
-
-  //   //   // await prisma.productImage.createMany({
-  //   //   //   data: imagesData
-  //   //   // });
-
-  //   // });
 
 
 
